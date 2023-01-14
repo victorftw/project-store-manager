@@ -7,6 +7,8 @@ const getAll = async () => {
 
 const getProductsById = async (id) => {
   const products = await productsModel.getProductsById(id);
+  const error = new Error('Product not found');
+  if (!products) throw error;
   return products;
 };
 

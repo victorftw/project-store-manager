@@ -7,7 +7,7 @@ const getAll = async () => {
 };
 
 const getProductsById = async (id) => {
-  const query = 'SELECT * FROM StoreManager.products WHERE id = ?';
+  const query = 'SELECT * FROM products WHERE id = ? ORDER BY id';
   const [[products]] = await conn.execute(query, [id]);
   return products;
 };

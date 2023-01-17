@@ -12,7 +12,14 @@ const getProductsById = async (id) => {
   return products;
 };
 
+const registerProduct = async ({ name }) => {
+  const query = 'INSERT INTO products (name) VALUES(?)';
+  const [{ insertId }] = await conn.execute(query, [name]);
+  return insertId;
+};
+
 module.exports = {
   getAll,
   getProductsById,
+  registerProduct,
 };

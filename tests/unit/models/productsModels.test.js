@@ -5,7 +5,7 @@ const conn = require('../../../src/models/connection');
 
 const productsModel = require('../../../src/models/productsModel');
 
-const { expect, use } = chai;
+const { expect } = chai;
 
 const allProductsResponse = [
   { id: 1, name: 'Martelo de Thor' },
@@ -13,7 +13,7 @@ const allProductsResponse = [
   { id: 3, name: 'Escudo do Capitão América' },
 ];
 
-describe('Testes de unidade do model de produtos', () => {
+describe('Testes de unidade dos models de produtos', () => {
   it('Testa se é possivel obter uma lista de todos os produtos', async () => {
     sinon.stub(conn, 'execute').resolves([allProductsResponse]);
 

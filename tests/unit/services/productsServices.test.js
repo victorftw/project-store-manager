@@ -2,8 +2,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 
-const conn = require('../../../src/models/connection');
-
 const productsServices = require('../../../src/services/productsServices');
 const productsModel = require('../../../src/models/productsModel');
 
@@ -17,7 +15,7 @@ const allProductsResponse = [
   { id: 3, name: 'Escudo do Capitão América' },
 ];
 
-describe('Testes de unidade do services de produtos', () => {
+describe('Testes de unidade dos services de produtos', () => {
   it('Testa se é possivel obter a lista de todos os produtos', async () => {
     sinon.stub(productsModel, 'getAll').resolves(allProductsResponse);
 
@@ -31,9 +29,18 @@ describe('Testes de unidade do services de produtos', () => {
       .stub(productsModel, 'getProductsById')
       .resolves(allProductsResponse[0]);
 
-    const response = await productsModel.getProductsById(1);
+    const response = await productsServices.getProductsById(1);
 
     expect(response).to.be.equal(allProductsResponse[0]);
+  });
+
+  it('Testa se retorna um erro caso o ID seja inválido', async () => {
+    sinon.stub(productsModel, 'getProductsById').resolves(undefined);
+    try {
+      await productsServices.getProductsById(999);
+    } catch (error) {
+      expect(error.message).to.be.equal('Product not found');
+    }
   });
 
   afterEach(() => sinon.restore());

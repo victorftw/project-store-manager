@@ -51,8 +51,8 @@ const getSaleById = async (id) => {
         INNER JOIN
     sales AS s ON s.id = sp.sale_id
         WHERE
-    sp.sale_id = ${id}`;
-  const [sales] = await conn.execute(query);
+    sp.sale_id = ?`;
+  const [sales] = await conn.execute(query, [id]);
   return camelize(sales);
 };
 

@@ -13,4 +13,8 @@ salesRouter.post(
   salesControllers.registerSales,
 );
 
+salesRouter.get('/sales', salesControllers.getAllSales);
+
+salesRouter.get('/sales/:id', salesControllers.getSaleById);
+
 module.exports = salesRouter;

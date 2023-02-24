@@ -16,6 +16,14 @@ const getSaleById = async (id) => {
   return response;
 };
 
+const updateSale = async (id, sales) => {
+  const sale = await salesModel.getSaleById(id);
+  if (!sale || sale.length === 0) throw new Error('Sale not found');
+
+  await Promise.all(sales.map((element) => salesModel.updateSale(id, element)));
+  return { saleId: id, itemsUpdated: sales };
+};
+
 const deleteSale = async (id) => {
   const response = await salesModel.deleteSale(id);
   if (!response) throw new Error('Sale not found');
@@ -26,5 +34,6 @@ module.exports = {
   registerSales,
   getAllSales,
   getSaleById,
+  updateSale,
   deleteSale,
 };

@@ -56,6 +56,14 @@ const getSaleById = async (id) => {
   return camelize(sales);
 };
 
+const updateSale = async (id, { productId, quantity }) => {
+  const query = 'UPDATE sales_products SET quantity = ? WHERE product_id = ? AND sale_id = ?';
+
+  await conn.execute(query, [quantity, productId, id]);
+
+  return { productId, quantity };
+};
+
 const deleteSale = async (id) => {
   const query = 'DELETE FROM sales WHERE id = ?';
   const [{ affectedRows }] = await conn.execute(query, [id]);
@@ -67,5 +75,6 @@ module.exports = {
   findProductById,
   getAllSales,
   getSaleById,
+  updateSale,
   deleteSale,
 };

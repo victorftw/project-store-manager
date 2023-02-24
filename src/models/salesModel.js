@@ -44,7 +44,7 @@ const getAllSales = async () => {
 };
 
 const getSaleById = async (id) => {
-    const query = `SELECT
+  const query = `SELECT
     s.date, sp.product_id, sp.quantity
         FROM
     sales_products AS sp
@@ -56,9 +56,16 @@ const getSaleById = async (id) => {
   return camelize(sales);
 };
 
+const deleteSale = async (id) => {
+  const query = 'DELETE FROM sales WHERE id = ?';
+  const [{ affectedRows }] = await conn.execute(query, [id]);
+  return affectedRows;
+};
+
 module.exports = {
   registerSales,
   findProductById,
   getAllSales,
   getSaleById,
+  deleteSale,
 };

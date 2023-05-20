@@ -5,6 +5,12 @@ const getAll = async (_req, res) => {
   res.status(200).json(response);
 };
 
+const searchByTerm = async (req, res) => {
+  const { q } = req.query;
+  const response = await productsServices.searchByTerm(q);
+  return res.status(200).json(response);
+};
+
 const getProductsById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -52,4 +58,5 @@ module.exports = {
   registerProduct,
   updateProduct,
   deleteProduct,
+  searchByTerm,
 };

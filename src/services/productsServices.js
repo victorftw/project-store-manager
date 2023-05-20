@@ -5,6 +5,11 @@ const getAll = async () => {
   return products;
 };
 
+const searchByTerm = async (q) => {
+  const product = await productsModel.searchByTerm(q);
+  return product;
+};
+
 const getProductsById = async (id) => {
   const products = await productsModel.getProductsById(id);
   if (!products) throw new Error('Product not found');
@@ -42,4 +47,5 @@ module.exports = {
   registerProduct,
   updateProduct,
   deleteProduct,
+  searchByTerm,
 };

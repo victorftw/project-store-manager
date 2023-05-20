@@ -6,6 +6,8 @@ const productRouter = Router();
 
 productRouter.get('/products', productsController.getAll);
 
+productRouter.get('/products/search', productsController.searchByTerm);
+
 productRouter.get('/products/:id', productsController.getProductsById);
 
 productRouter.post('/products', validateName, productsController.registerProduct);

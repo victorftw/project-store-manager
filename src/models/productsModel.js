@@ -6,6 +6,12 @@ const getAll = async () => {
   return products;
 };
 
+const searchByTerm = async (q) => {
+  const allProducts = await getAll();
+  const searchTerm = allProducts.filter((product) => product.name.includes(q)) || allProducts;
+  return searchTerm;
+};
+
 const getProductsById = async (id) => {
   const query = 'SELECT * FROM products WHERE id = ? ORDER BY id';
   const [[products]] = await conn.execute(query, [id]);
@@ -36,4 +42,5 @@ module.exports = {
   registerProduct,
   updateProduct,
   deleteProduct,
+  searchByTerm,
 };

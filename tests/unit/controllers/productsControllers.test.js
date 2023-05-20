@@ -5,7 +5,6 @@ const sinon = require('sinon');
 const conn = require('../../../src/models/connection');
 
 const app = require('../../../src/app');
-const productsController = require('../../../src/controllers/productsController');
 
 const { expect, use } = chai;
 
